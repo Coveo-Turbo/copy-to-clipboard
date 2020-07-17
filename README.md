@@ -6,13 +6,19 @@ Disclaimer: This component was built by the community at large and is not an off
 
 ## Getting Started
 
-1. Install the component into your project.
+1. Install the component into your project
 
 ```
 npm i @coveops/copy-to-clipboard
 ```
 
-2. Use the Component or extend it
+2. Import fontawesome into the markup
+
+```html
+<script src="https://kit.fontawesome.com/515c3b5b58.js" crossorigin="anonymous"></script>
+```
+
+3. Use the Component or extend it
 
 Typescript:
 
@@ -26,13 +32,13 @@ Javascript
 const CopyToClipboard = require('@coveops/copy-to-clipboard').CopyToClipboard;
 ```
 
-3. You can also expose the component alongside other components being built in your project.
+4. You can also expose the component alongside other components being built in your project.
 
 ```javascript
 export * from '@coveops/copy-to-clipboard'
 ```
 
-4. Include the component in your template as follows:
+5. Include the component in your template as follows:
 
 Place the component after the last tab in the `coveo-tab-section`
 
