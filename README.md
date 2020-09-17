@@ -38,7 +38,15 @@ const CopyToClipboard = require('@coveops/copy-to-clipboard').CopyToClipboard;
 export * from '@coveops/copy-to-clipboard'
 ```
 
-5. Include the component in your template as follows:
+5. Or for quick testing, you can add the script from unpkg
+
+```html
+<script src="https://unpkg.com/@coveops/copy-to-clipboard@latest/dist/index.min.js"></script>
+```
+
+> Disclaimer: Unpkg should be used for testing but not for production.
+
+6. Include the component in your template as follows:
 
 Place the component after the last tab in the `coveo-tab-section`
 
