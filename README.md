@@ -1,8 +1,13 @@
 # CopyToClipboard
 
-Allows the user to copy a value to their clipboard.
-
 Disclaimer: This component was built by the community at large and is not an official Coveo JSUI Component. Use this component at your own risk.
+
+The CopyToClipboard component allows the user to copy a value specified to their clipboard. It has the following parameters:
+
+- caption: Message to display before copying 
+- copiedCaption: Message to display after copying
+- field: Field to copy data from
+- resetTimeout: # Milliseconds before caption resets
 
 ## Getting Started
 
