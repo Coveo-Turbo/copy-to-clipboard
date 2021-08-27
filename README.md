@@ -59,6 +59,19 @@ Place the component after the last tab in the `coveo-tab-section`
 <div class="CoveoCopyToClipboard"></div>
 ```
 
+## Options
+
+The following options can be configured:
+
+| Option | Required | Type | Default | Notes |
+| --- | --- | --- | --- | --- |
+| `caption` | No | IFieldOption[ ] | `Copy` | The caption shown on the component. |
+| `copiedCaption` | No | string | `Copied!` | The caption shown when you successfully copied the field. |
+| `resetTimeout` | No | string | `3000` | The amount of milliseconds before the caption reverts from `copiedCaption` to `caption`. |
+| `field` | No | string | `clickUri` | The field whose value will be copied to the clipboard. |
+| `altTitle` | No | string | `Copy` | The alternate title displayed for accessibility purposes. |
+| `icon` | No | string | `far fa-clipboard` | The icon displayed on the component. |
+
 ## Extending
 
 Extending the component can be done as follows:

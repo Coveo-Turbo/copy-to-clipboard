@@ -1,6 +1,6 @@
 {
     "name": "@coveops/copy-to-clipboard",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Allows the user to copy a value to their clipboard.",
     "main": "dist/index.js",
     "scripts": {
@@ -12,14 +12,14 @@
     "author": "",
     "license": "Apache-2.0",
     "devDependencies": {
-        "@coveops/cli": "^0.8.1"
+        "@coveops/cli": "^0.17.0"
     },
     "types": "dist/index.d.ts",
     "files": [
         "dist"
     ],
     "dependencies": {
-        "@coveops/turbo-core": "^1.1.1",
-        "coveo-search-ui": "^2.9373.6"
+        "@coveops/turbo-core": "^1.2.1",
+        "coveo-search-ui": "^2.10089.0"
     }
 }

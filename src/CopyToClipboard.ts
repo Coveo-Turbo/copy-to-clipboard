@@ -1,13 +1,13 @@
 import {
-    Component,
-    ComponentOptions,
-    IComponentBindings,
-    IQueryResult,
-    $$,
-    IAnalyticsActionCause,
-    IAnalyticsDocumentViewMeta,
-    IFieldOption,
-    Initialization
+  Component,
+  ComponentOptions,
+  IComponentBindings,
+  IQueryResult,
+  $$,
+  IAnalyticsActionCause,
+  IAnalyticsDocumentViewMeta,
+  IFieldOption,
+  Initialization
 } from 'coveo-search-ui';
 import { lazyComponent } from '@coveops/turbo-core';
 
@@ -16,6 +16,8 @@ export interface ICopyToClipboardOptions {
   copiedCaption: string;
   resetTimeout: number;
   field: IFieldOption;
+  altTitle: string;
+  icon: string;
 }
 
 @lazyComponent
@@ -25,7 +27,9 @@ export class CopyToClipboard extends Component {
     caption: ComponentOptions.buildStringOption({ defaultValue: 'Copy' }),
     copiedCaption: ComponentOptions.buildStringOption({ defaultValue: 'Copied!' }),
     resetTimeout: ComponentOptions.buildNumberOption({ defaultValue: 3000 }),
-    field: ComponentOptions.buildFieldOption({ defaultValue: '@clickUri' })
+    field: ComponentOptions.buildFieldOption({ defaultValue: '@clickUri' }),
+    altTitle: ComponentOptions.buildStringOption({ defaultValue: 'Copy' }),
+    icon: ComponentOptions.buildStringOption({ defaultValue: 'far fa-clipboard' }),
   };
 
   constructor(public element: HTMLElement, public options: ICopyToClipboardOptions, public bindings: IComponentBindings, public result: IQueryResult) {
@@ -35,24 +39,25 @@ export class CopyToClipboard extends Component {
   }
 
   protected build() {
-    const fieldValue = Coveo.Utils.getFieldValue(this.result, this.options.field as string);
+    const { field, altTitle, icon, caption, copiedCaption, resetTimeout } = this.options;
+    const fieldValue = Coveo.Utils.getFieldValue(this.result, field as string);
 
     if (!fieldValue) {
-      this.logger.error(`Unable to copy URL to clipboard. No value was found for the field ${this.options.field}`);
+      this.logger.error(`Unable to copy URL to clipboard. No value was found for the field ${field}`);
       $$(this.element).remove();
     } else {
-      const icon = $$('span', {}, $$('i', { className: 'far fa-clipboard' })).el;
-      const caption = $$('div', { className: 'caption' }, this.options.caption).el;
+      const iconElement = $$('span', {}, $$('i', { className: icon, title: altTitle })).el;
+      const captionElement = $$('div', { className: 'caption' }, caption).el;
       $$(this.element).addClass('flex align-center');
-      $$(this.element).append(icon);
-      $$(this.element).append(caption);
+      $$(this.element).append(iconElement);
+      $$(this.element).append(captionElement);
       $$(this.element).on('click', () => {
-        caption.textContent = this.options.copiedCaption;
+        captionElement.textContent = copiedCaption;
         this.copyToClipboard(fieldValue);
         this.logCustomEvent();
         setTimeout(() => {
-          caption.textContent = this.options.caption;
-        }, this.options.resetTimeout);
+          captionElement.textContent = caption;
+        }, resetTimeout);
       });
     }
   }
