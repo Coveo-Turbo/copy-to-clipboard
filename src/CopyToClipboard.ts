@@ -75,7 +75,7 @@ export class CopyToClipboard extends Component {
         this.copyToClipboard(fieldValue);
         this.logCustomEvent();
         setTimeout(() => {
-          captionElement.textContent = caption;
+          captionElement.textContent = renderedCaption;
         }, resetTimeout);
       });
     }
