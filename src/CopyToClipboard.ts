@@ -70,7 +70,6 @@ export class CopyToClipboard extends Component {
         captionElement = $$('span', { className: 'coveo-copy-to-clipboard-caption' }, caption).el;
         $$(this.element).append(captionElement);
       }
-      $$(this.element).append(captionElement);
       $$(this.element).on('click', () => {
         captionElement.textContent = copiedCaption;
         this.copyToClipboard(fieldValue);
