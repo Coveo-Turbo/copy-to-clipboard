@@ -52,6 +52,7 @@ export class CopyToClipboard extends Component {
     const fieldValue = Coveo.Utils.getFieldValue(this.result, field as string);
     let iconElement: HTMLElement;
     let captionElement: HTMLElement;
+    const renderedCaption = hasCaption ? caption : '';
 
     if (!fieldValue) {
       this.logger.error(`Unable to copy URL to clipboard. No value was found for the field ${field}`);
@@ -66,10 +67,9 @@ export class CopyToClipboard extends Component {
         iconElement.firstElementChild.setAttribute('width', `${iconWidth}`);
         $$(this.element).append(iconElement);
       }
-      if (hasCaption) {
-        captionElement = $$('span', { className: 'coveo-copy-to-clipboard-caption' }, caption).el;
-        $$(this.element).append(captionElement);
-      }
+      captionElement = $$('span', { className: 'coveo-copy-to-clipboard-caption' }, renderedCaption).el;
+      $$(this.element).append(captionElement);
+
       $$(this.element).on('click', () => {
         captionElement.textContent = copiedCaption;
         this.copyToClipboard(fieldValue);
