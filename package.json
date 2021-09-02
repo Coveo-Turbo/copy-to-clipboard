@@ -1,11 +1,12 @@
 {
     "name": "@coveops/copy-to-clipboard",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Allows the user to copy a value to their clipboard.",
     "main": "dist/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "coveops build CopyToClipboard --template typescript",
+        "watch": "coveops build CopyToClipboard --template typescript --watch",
         "serve": "coveops serve",
         "precompile": "npm run build"
     },

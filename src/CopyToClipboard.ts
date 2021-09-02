@@ -10,6 +10,7 @@ import {
   Initialization
 } from 'coveo-search-ui';
 import { lazyComponent } from '@coveops/turbo-core';
+import { iconLibrary } from './IconLibrary';
 
 export interface ICopyToClipboardOptions {
   caption: string;
@@ -18,6 +19,10 @@ export interface ICopyToClipboardOptions {
   field: IFieldOption;
   altTitle: string;
   icon: string;
+  hasIcon: boolean;
+  iconHeight: number;
+  iconWidth: number;
+  hasCaption: boolean;
 }
 
 @lazyComponent
@@ -29,7 +34,11 @@ export class CopyToClipboard extends Component {
     resetTimeout: ComponentOptions.buildNumberOption({ defaultValue: 3000 }),
     field: ComponentOptions.buildFieldOption({ defaultValue: '@clickUri' }),
     altTitle: ComponentOptions.buildStringOption({ defaultValue: 'Copy' }),
-    icon: ComponentOptions.buildStringOption({ defaultValue: 'far fa-clipboard' }),
+    icon: ComponentOptions.buildStringOption({ defaultValue: 'clipboard' }),
+    hasIcon: ComponentOptions.buildBooleanOption({ defaultValue: false }),
+    hasCaption: ComponentOptions.buildBooleanOption({ defaultValue: true }),
+    iconHeight: ComponentOptions.buildNumberOption({ defaultValue: 18 }),
+    iconWidth: ComponentOptions.buildNumberOption({ defaultValue: 18 }),
   };
 
   constructor(public element: HTMLElement, public options: ICopyToClipboardOptions, public bindings: IComponentBindings, public result: IQueryResult) {
@@ -39,17 +48,28 @@ export class CopyToClipboard extends Component {
   }
 
   protected build() {
-    const { field, altTitle, icon, caption, copiedCaption, resetTimeout } = this.options;
+    const { field, altTitle, caption, copiedCaption, resetTimeout, icon, hasIcon, hasCaption, iconHeight, iconWidth } = this.options;
     const fieldValue = Coveo.Utils.getFieldValue(this.result, field as string);
+    let iconElement: HTMLElement;
+    let captionElement: HTMLElement;
 
     if (!fieldValue) {
       this.logger.error(`Unable to copy URL to clipboard. No value was found for the field ${field}`);
       $$(this.element).remove();
     } else {
-      const iconElement = $$('span', {}, $$('i', { className: icon, title: altTitle })).el;
-      const captionElement = $$('div', { className: 'caption' }, caption).el;
       $$(this.element).addClass('flex align-center');
-      $$(this.element).append(iconElement);
+      if (hasIcon) {
+        let renderedIcon: string;
+        renderedIcon = iconLibrary.has(icon) ? iconLibrary.get(icon) : icon;
+        iconElement = $$('span', { className: 'coveo-copy-to-clipboard-icon', title: altTitle }, renderedIcon).el;
+        iconElement.firstElementChild.setAttribute('height', `${iconHeight}`);
+        iconElement.firstElementChild.setAttribute('width', `${iconWidth}`);
+        $$(this.element).append(iconElement);
+      }
+      if (hasCaption) {
+        captionElement = $$('span', { className: 'coveo-copy-to-clipboard-caption' }, caption).el;
+        $$(this.element).append(captionElement);
+      }
       $$(this.element).append(captionElement);
       $$(this.element).on('click', () => {
         captionElement.textContent = copiedCaption;
