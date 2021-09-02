@@ -7,9 +7,8 @@ import {
   IAnalyticsActionCause,
   IAnalyticsDocumentViewMeta,
   IFieldOption,
-  Initialization
 } from 'coveo-search-ui';
-import { lazyComponent } from '@coveops/turbo-core';
+import { component } from '@coveops/turbo-core';
 import { iconLibrary } from './IconLibrary';
 
 export interface ICopyToClipboardOptions {
@@ -25,7 +24,7 @@ export interface ICopyToClipboardOptions {
   hasCaption: boolean;
 }
 
-@lazyComponent
+@component
 export class CopyToClipboard extends Component {
   static ID = 'CopyToClipboard';
   static options: ICopyToClipboardOptions = {

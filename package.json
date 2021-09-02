@@ -1,6 +1,6 @@
 {
     "name": "@coveops/copy-to-clipboard",
-    "version": "1.2.3",
+    "version": "1.2.5",
     "description": "Allows the user to copy a value to their clipboard.",
     "main": "dist/index.js",
     "scripts": {

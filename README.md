@@ -80,6 +80,14 @@ If none of these icons serve your purpose, you may use your own SVG icon like so
 
 Avoid self-closing tags for maximum compatibility.
 
+## Regarding Salesforce
+
+If you wish to use this component in Salesforce, please use the equivalent `CoveoSalesforceCopyToClipboard` component embedded in this package.
+
+```html
+<div class="CoveoSalesforceCopyToClipboard"></div>
+```
+
 ## Extending
 
 Extending the component can be done as follows:
